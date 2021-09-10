@@ -1,6 +1,7 @@
 (function(){
     
     $('body').append("<p>A Fellow ecossystem.</p>");
+    $('body').append("<p>Gostei de Duloc, bem limpa.</p>");
 
     // PEGA O PARÂMETRO QUE VAI NA TAG <SCRIPT
     // var one = document.currentScript.getAttribute('one'); //1

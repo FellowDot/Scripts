@@ -1,5 +1,6 @@
 (function(){
     
+    $('body').append("<p>Os ogros tem camadas, as cebolas tem camadas.</p>");
     $('body').append("<p>É por isso que ninguém gosta de ogros.</p>");
     $('body').append("<p>Gostei de Duloc, bem limpa.</p>");
 

@@ -1,0 +1,515 @@
+/*============================================================================
+checkout.scss.tpl
+
+    -This file contains all the theme styles related to the checkout based on settings defined by user from config/settings.txt
+    -Rest of styling can be found in:
+        -static/css/style-colors.scss.tpl --> For color and font styles related to config/settings.txt
+        -static/css/style-async.scss.tpl --> For non critical styles witch will be loaded asynchronously
+        -static/css/style-critical.tpl --> For critical CSS rendered inline before the rest of the site
+
+==============================================================================*/
+body {
+  font-family: "Muli", sans-serif;
+  color: #000000;
+  background-color: white; }
+
+a {
+  color: #1d1e4a; }
+  a:hover, a:focus {
+    color: #070813; }
+    a:hover svg, a:focus svg {
+      fill: #070813; }
+  a svg {
+    fill: #1d1e4a; }
+
+.title {
+  color: #000000; }
+
+.header {
+  background-color: white;
+  border-color: #24255c; }
+
+.headbar {
+  background: white; }
+
+.form-control {
+  border-color: #d9d9d9;
+  color: #0d0d0d; }
+  .form-control:focus {
+    border-color: #24255c !important;
+    outline: none; }
+
+.form-options-content {
+  color: #262626;
+  border-color: rgba(217, 217, 217, 0.6); }
+
+.form-group-error .form-control {
+  border-color: #c13a3a; }
+  .form-group-error .form-control:focus {
+    border-color: #c13a3a; }
+
+.form-group input[type="radio"] + .form-options-content .unchecked {
+  fill: #e6e6e6; }
+
+.form-group input[type="radio"] + .form-options-content .checked {
+  fill: #24255c; }
+
+.form-group input[type="radio"]:checked + .form-options-content {
+  border: 1px solid #24255c;
+  border-color: #e6e6e6; }
+  .form-group input[type="radio"]:checked + .form-options-content + .form-options-accordion {
+    border-color: #e6e6e6; }
+  .form-group input[type="radio"]:checked + .form-options-content .checked {
+    fill: #24255c; }
+
+.form-group input[type="checkbox"]:checked + .form-options-content .checked {
+  fill: #000000; }
+
+.form-group input[disabled] + .form-options-content {
+  border-color: #e6e6e6 !important; }
+  .form-group input[disabled] + .form-options-content .form-options-label {
+    color: #000000 !important; }
+  .form-group input[disabled] + .form-options-content .checked {
+    fill: #000000 !important; }
+
+.form-group input[type="checkbox"] + .form-options-content .unchecked {
+  fill: #000000; }
+
+.input-label {
+  color: #141414; }
+
+.btn-primary {
+  border-radius: 0;
+  background: #24255c; }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background: #24255c;
+    opacity: 0.9; }
+
+.btn-secondary {
+  color: #000000;
+  background: #f2f2f2;
+  border-color: #e0e0e0; }
+  .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary:active:focus {
+    color: #000000;
+    background: #e6e6e6;
+    border-color: #cccccc; }
+    .btn-secondary:hover .btn-icon-right, .btn-secondary:focus .btn-icon-right, .btn-secondary:active .btn-icon-right, .btn-secondary:active:focus .btn-icon-right {
+      fill: #000000; }
+  .btn-secondary .btn-icon-right {
+    fill: #000000; }
+
+.btn-transparent {
+  color: #262626; }
+  .btn-transparent:hover {
+    color: #24255c; }
+    .btn-transparent:hover .btn-icon-right {
+      fill: #24255c; }
+  .btn-transparent .btn-icon-right {
+    fill: #262626; }
+
+.btn-link {
+  color: #000000;
+  text-decoration: none; }
+  .btn-link:hover {
+    color: #24255c; }
+    .btn-link:hover svg {
+      fill: #24255c; }
+
+.btn-picker {
+  border-color: #d9d9d9;
+  border-radius: 0; }
+
+.login-info {
+  margin: 5px 0 0;
+  font-size: 12px;
+  text-align: left; }
+
+.breadcrumb li .breadcrumb-step {
+  background: #f2f2f2;
+  color: rgba(0, 0, 0, 0.6); }
+  .breadcrumb li .breadcrumb-step.active {
+    background-color: #24255c;
+    color: #fff; }
+    .breadcrumb li .breadcrumb-step.active:before {
+      border-color: transparent transparent transparent #4142a5; }
+    .breadcrumb li .breadcrumb-step.active:after {
+      border-color: transparent transparent transparent #24255c; }
+  .breadcrumb li .breadcrumb-step.visited {
+    background: #4142a5; }
+
+.accordion {
+  color: #000000;
+  background-color: #FFFFFF;
+  border-radius: 0;
+  border-color: rgba(217, 217, 217, 0.5); }
+
+.accordion-section-header-icon {
+  fill: #000000; }
+
+.accordion-rotate-icon {
+  fill: #000000; }
+
+.mobile-discount-coupon_btn {
+  border-radius: 0;
+  border-color: #e6e6e6;
+  color: #333333; }
+  .mobile-discount-coupon_btn .icon {
+    color: #333333; }
+
+@media (max-width: 576px) {
+  .summary .panel {
+    border: 0; } }
+
+.summary-details {
+  background: white; }
+
+.summary-container {
+  background: white; }
+
+.summary-total {
+  color: #000000;
+  background: #FFFFFF; }
+
+.summary-img-thumb {
+  border-radius: 0; }
+
+.summary-arrow-rounded {
+  background: #24255c; }
+
+.summary-arrow-icon {
+  fill: #000000; }
+
+.summary-title {
+  color: #161637; }
+
+.radio-group.radio-group-accordion {
+  border-color: #d9d9d9; }
+  .radio-group.radio-group-accordion .radio {
+    border-color: #dedede; }
+
+.radio input:checked + .selector:before {
+  background-image: radial-gradient(circle, #000000 0%, #000000 40%, transparent 50%, transparent 100%);
+  border-color: #000000; }
+
+.radio input:disabled:checked + .selector:before {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 50%, transparent 100%); }
+
+.radio .selector:before {
+  border-color: rgba(0, 0, 0, 0.5); }
+
+.radio-content {
+  border-color: #000000;
+  background: #f9f9f9; }
+
+.radio.active .payment-item-discount {
+  color: #FFFFFF; }
+
+.shipping-option {
+  border-radius: 0;
+  border-color: rgba(217, 217, 217, 0.7); }
+  .shipping-option.active {
+    border-color: #24255c; }
+
+.panel {
+  color: #141414;
+  box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background-color: white; }
+
+.panel-header {
+  color: #000000;
+  text-shadow: none;
+  border-color: rgba(217, 217, 217, 0.7);
+  font-weight: bold; }
+
+.panel-header-sticky {
+  background-color: white; }
+
+.panel-footer {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background: #fafafa; }
+  .panel-footer-wa {
+    border-color: #f2f2f2; }
+
+.panel-footer-form input {
+  border-color: #000000; }
+
+.panel-footer-form .input-group-addon {
+  background: #FFFFFF;
+  border-color: #000000; }
+
+.panel-footer-form .disabled {
+  background: #d9d9d9 !important; }
+
+.table,
+.table-footer {
+  color: #0d0d0d;
+  border-color: rgba(0, 0, 0, 0.09); }
+
+.table-subtotal {
+  border-color: rgba(36, 37, 92, 0.9); }
+
+.table .table-discount-coupon, .table .table-discount-promotion {
+  border-color: rgba(0, 0, 0, 0.09);
+  color: #24255c; }
+
+.shipping-options {
+  color: #121212; }
+
+.shipping-method-item-desc,
+.shipping-method-item-name {
+  color: #1a1a1a; }
+
+.shipping-method-item-price {
+  color: #24255c; }
+
+.box-discount-coupon button {
+  color: #cccccc;
+  background: #24255c; }
+  .box-discount-coupon button:hover {
+    background: #3a3b93 radial-gradient(circle, transparent 1%, #3a3b93 1%) center/15000%; }
+
+.box-discount-coupon-applied {
+  background-color: rgba(242, 242, 242, 0.5);
+  border-radius: 0;
+  color: #24255c; }
+  .box-discount-coupon-applied .coupon-icon {
+    fill: #24255c; }
+
+.orderstatus {
+  border: 1px solid rgba(0, 0, 0, 0.1); }
+
+@media (max-width: 576px) {
+  .orderstatus-footer {
+    background: #FFFFFF; } }
+
+.destination {
+  border-color: rgba(0, 0, 0, 0.1); }
+
+.destination-icon svg {
+  fill: #24255c; }
+
+.user-detail-icon svg {
+  fill: #24255c; }
+
+.bookmark-icon {
+  fill: #24255c;
+  color: #24255c; }
+
+.delivery-address {
+  border-color: rgba(217, 217, 217, 0.5); }
+  .delivery-address-icon svg {
+    fill: rgba(0, 0, 0, 0.6); }
+
+.history-item-done .history-item-title {
+  color: #000000; }
+
+.history-item-failure .history-item-title {
+  color: #c13a3a; }
+
+.history-item-progress-icon svg {
+  fill: #e6e6e6; }
+
+.history-item-progress-icon:after {
+  fill: #e6e6e6;
+  border-color: #e6e6e6; }
+
+.history-item-progress-icon-failure svg {
+  fill: #c13a3a; }
+
+.history-item-progress-icon-success svg {
+  fill: #24255c; }
+
+.history-item-progress-icon-success:after {
+  border-color: #24255c; }
+
+.history-canceled {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0; }
+  .history-canceled-round {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
+
+.history-canceled-header {
+  border-color: rgba(217, 217, 217, 0.7);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.history-canceled-icon svg {
+  fill: #8c8c8c; }
+
+.ticket-coupon {
+  background: whitesmoke;
+  border-color: #d9d9d9; }
+
+.status {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 25px 0; }
+  @media (min-width: 768px) {
+    .status {
+      padding: 40px 0; } }
+.status-icon svg {
+  fill: #24255c; }
+
+.tracking-item-time {
+  color: #000000; }
+
+.support {
+  border-color: rgba(217, 217, 217, 0.6);
+  background: white; }
+  @media (min-width: 768px) {
+    .support {
+      background: none; } }
+  @media (max-width: 576px) {
+    .support-left {
+      border-color: #f2f2f2; } }
+  .support-left svg {
+    fill: #000000; }
+
+.whatsapp-form input,
+.whatsapp-form .input-group-addon {
+  border-color: #24255c; }
+
+.border-top {
+  border-color: rgba(217, 217, 217, 0.4); }
+
+.general-error {
+  background: #c13a3a;
+  border-color: #cf5f5f; }
+
+.badge {
+  border-color: #d9d9d9; }
+
+.payment-item-discount {
+  color: #24255c; }
+
+.payment-option {
+  border-radius: 0;
+  color: #000000;
+  background-color: #FFFFFF;
+  border-color: rgba(217, 217, 217, 0.5); }
+
+.radio-content.payment-option-content {
+  background: #fafafa;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  border-top: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+
+.overlay {
+  background: rgba(230, 230, 230, 0.6); }
+
+.overlay-title {
+  color: rgba(0, 0, 0, 0.7); }
+
+.list-picker .unchecked {
+  fill: #000000; }
+
+.list-picker li {
+  border-color: #d9d9d9;
+  background: white; }
+  .list-picker li.active {
+    background: #FFFFFF;
+    color: #24255c; }
+    .list-picker li.active .checked {
+      fill: #24255c; }
+
+.list-picker-content {
+  background: white;
+  border-color: #d9d9d9; }
+
+.loading {
+  background: rgba(250, 250, 250, 0.5);
+  color: #24255c; }
+
+.loading-spinner {
+  color: #24255c; }
+
+.round-spinner {
+  border-color: #24255c;
+  border-left-color: #1d1e4a; }
+  .round-spinner:after {
+    border-color: #24255c;
+    border-left-color: #1d1e4a; }
+
+.spinner > .spinner-elem {
+  background: #24255c; }
+
+.spinner-inverted > .spinner-elem {
+  background: #FFFFFF; }
+
+.signup {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 25px 0; }
+  @media (min-width: 768px) {
+    .signup {
+      padding: 40px 0; } }
+.signup-icon svg {
+  fill: #24255c; }
+
+.modal-dialog {
+  background: #FFFFFF; }
+
+@media (max-width: 0) {
+  .modal-xs {
+    background: #FFFFFF; } }
+
+@media (max-width: 0) {
+  .modal-xs {
+    background: #FFFFFF; } }
+
+.list-group-item {
+  border-color: rgba(0, 0, 0, 0.1); }
+
+.announcement {
+  color: #161637; }
+  .announcement-bg {
+    background: #24255c;
+    box-shadow: 0px 3px 5px -1px rgba(7, 8, 19, 0.35);
+    border-radius: 0; }
+  .announcement-close {
+    color: #24255c; }
+
+.alert-info {
+  background-color: rgba(36, 37, 92, 0.15);
+  border-color: rgba(36, 37, 92, 0.2);
+  color: #21212c; }
+  .alert-info .alert-icon {
+    fill: #1d1e30; }
+
+.chip {
+  background-color: rgba(36, 37, 92, 0.15);
+  color: #21212c;
+  border-radius: 0; }
+
+.tooltip-icon {
+  fill: #000000; }
+
+.price--display__free {
+  color: #24255c; }
+
+.review-block-detailed-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+  .review-block-detailed-item:last-child {
+    border-radius: 0 0 0 0; }
+
+.review-block-detailed {
+  border: 0;
+  box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  background-color: #FFFFFF;
+  border-color: rgba(217, 217, 217, 0.5); }
+
+.tabs-wrapper {
+  background: #FFFFFF;
+  border-bottom-color: #e6e6e6; }
+
+.tab-item.active {
+  color: #24255c;
+  font-weight: bold; }
+
+.tab-indicator {
+  background-color: #24255c; }

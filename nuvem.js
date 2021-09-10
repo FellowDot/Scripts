@@ -11,9 +11,9 @@ var loadScript = function(url, callback){
        $ in this scope references the jQuery object we'll use.
        Don't use 'jQuery', or 'jQuery191', here. Use the dollar sign
        that was passed as argument.*/
-    // $('__next').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
-    var next = document.getElementById('__next');
-    next.append("Gostei de Duloc, muito limpa "+$.fn.jquery);
+    $('form').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
+    // var next = document.getElementById('__next');
+    // next.append("Gostei de Duloc, muito limpa "+$.fn.jquery);
   };
 
 var scripts = document.getElementsByTagName('script');

@@ -1,6 +1,6 @@
 (function(){
     
-    $('body').append("<p>A Fellow ecossystem.</p>");
+    $('body').append("<p>A FellowDot-patch-1 ecossystem.</p>");
     $('body').append("<p>Gostei de Duloc, bem limpa.</p>");
 
     // PEGA O PARÂMETRO QUE VAI NA TAG <SCRIPT

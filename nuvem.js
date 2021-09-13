@@ -6,17 +6,28 @@ var loadScript = function(url, callback){
   
 };
   
-var myAppJavaScript = function($){
+var myAppJavaScript = function(){
     /* Your app's JavaScript here.
        $ in this scope references the jQuery object we'll use.
        Don't use 'jQuery', or 'jQuery191', here. Use the dollar sign
        that was passed as argument.*/
 
-    console.log("ENtrou na função");
-    console.log($('body'));
-    $('form').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
-    // var next = document.getElementById('__next');
-    // next.append("Gostei de Duloc, muito limpa "+$.fn.jquery);
+    console.log("Entrou na função");
+    // console.log($('body'));
+    // var next = document.getElementsByTagName('form');
+    // next.appendChild("<p>Gostei de Duloc, muito limpa</p>");
+    // var el = document.getElementById('element');
+    // var form = document.getElementsByTagName('form');
+    // el.innerHTML = '<p><a id="clickme" href="#">Click me</a></p>';
+    // document.getElementById('clickme').onclick = function (e) {
+    //     e.preventDefault();
+    //     document.body.innerHTML += '<p>Gostei de Duloc, muito limpa.</p>';
+    // }
+
+    const duloc = document.createElement("p");
+    duloc.innerHTML += "Gostei de Duloc, muito limpa.";
+    
+    document.getElementsByTagName('form')[0].appendChild(duloc);
 };
 
 var scripts = document.getElementsByTagName('script');
@@ -52,4 +63,4 @@ console.log("store = ", params["store"])
 
 // document.getElementById('fellow-btn').onclick = reply_click;
 
-myAppJavaScript(jQuery);
+myAppJavaScript();

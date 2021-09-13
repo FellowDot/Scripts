@@ -53,7 +53,9 @@ function parseQuery ( query ) {
     return Params;
 }
 
-console.log("store = ", params["store"])
+console.log("store = ", params["store"]);
+
+console.log(LS);
 
 // var reply_click = function(){
 //     var email = document.getElementById('fellow-email').value

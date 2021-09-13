@@ -11,7 +11,10 @@ var loadScript = function(url, callback){
        $ in this scope references the jQuery object we'll use.
        Don't use 'jQuery', or 'jQuery191', here. Use the dollar sign
        that was passed as argument.*/
-    $('form').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
+
+    console.log("ENtrou na função");
+    console.log($('form'));
+    // $('form').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
     // var next = document.getElementById('__next');
     // next.append("Gostei de Duloc, muito limpa "+$.fn.jquery);
   };

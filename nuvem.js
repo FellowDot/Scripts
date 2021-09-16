@@ -32,7 +32,7 @@ var myAppJavaScript = function(){
     div.className = "float"
     div.style.width = "100%"
     div.style.display = "flex"
-    div.style.border = "2px solid #cb6223"
+    div.style.border = "1px solid rgba(67, 67, 67, 0.3)"
     div.style.borderRadius = "5px"
     div.style.marginBottom = "15px"
 

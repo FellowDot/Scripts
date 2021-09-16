@@ -1,0 +1,57 @@
+{
+    "store": {
+        "id": 1643050,
+        "url": "fellowbee.com.br"
+    },
+    "cart": {
+        "id": 471184874,
+        "subtotal": 16900,
+        "items": [
+            {
+                "id": 621525520,
+                "variant_id": 335309413,
+                "name": "MOLETON FEMININO ZANGÃO RUBRO NEGRO (M, Branco, Feminino)",
+                "unit_price": 16900,
+                "quantity": 1,
+                "sku": null,
+                "is_ahora_12_eligible": true
+            }
+        ],
+        "shippingAddress": {
+            "zipcode": "36050440",
+            "first_name": "João Marcos",
+            "last_name": "de Freitas",
+            "address": "Rua Théo Sobrinho",
+            "number": "10",
+            "floor": "",
+            "locality": "Progresso",
+            "city": "Juiz de Fora",
+            "state": "Minas Gerais",
+            "country": "BR",
+            "phone": "",
+            "between_streets": null,
+            "reference": null
+        },
+        "contact": {
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": "2021-09-13T19:54:24+0000"
+        },
+        "isAhora12Eligible": true
+    },
+    "langCode": "pt",
+    "lang": "pt_BR",
+    "currency": "BRL",
+    "customer": 72923084,
+    "ready": {},
+    "order": {
+        "id": 471184874,
+        "number": 103,
+        "hash": "49618addb48556fa5ce967bf60d1bd7964f05abd",
+        "created_at": "2021-09-13 19:55:55",
+        "coupon": null,
+        "discount": 0,
+        "total": 17935,
+        "total_in_usd": 3419,
+        "gateway": "mercadopago"
+    }
+}

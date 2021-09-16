@@ -26,8 +26,11 @@ var myAppJavaScript = function(){
 
     const duloc = document.createElement("p");
     duloc.innerHTML += "Gostei de Duloc, muito limpa.";
-    
-    document.getElementsByTagName('form')[0].appendChild(duloc);
+
+    const fellow_logo = document.createElement("img");
+    fellow_logo.src = 'https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png'
+
+    document.getElementsByTagName('form')[0].appendChild(fellow_logo);
 };
 
 var scripts = document.getElementsByTagName('script');

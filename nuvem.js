@@ -123,7 +123,7 @@ function parseQuery ( query ) {
 // document.getElementById('fellow-btn').onclick = reply_click;
 
 // ### ATIVA O FELLOE-E NO CHECKOUT DA NUVEM
-const DEBUG = true
+const DEBUG = false
 
 if(DEBUG){
     myAppJavaScript();

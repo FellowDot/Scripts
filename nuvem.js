@@ -27,11 +27,47 @@ var myAppJavaScript = function(){
     const duloc = document.createElement("p");
     duloc.innerHTML += "Gostei de Duloc, muito limpa.";
 
-    const fellow_dot = document.createElement("img");
-    fellow_dot.src += "https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png";
+    const div = document.createElement("div");
+    div.id = "main_div"
+    div.className = "float"
+    div.style.width = "100%"
+    div.style.display = "flex"
+    div.style.border = "2px solid #cb6223"
+    div.style.borderRadius = "5px"
+    div.style.marginBottom = "15px"
+
+    const left_div = document.createElement("div");
+    left_div.id = "left_div"
+    left_div.style.width = "50%"
+    // left_div.style.border = "2px solid #bb6223"
+    // left_div.style.borderRadius = "25px"
+
+    const right_div = document.createElement("div");
+    right_div.id = "right_div"
+    right_div.style.width = "50%"
+    right_div.style.display = "table"
+    // right_div.style.border = "2px solid #bb6223"
+    // right_div.style.borderRadius = "25px"
     
-    var el = document.getElementsByTagName('form')[0]
-    el.insertBefore(fellow_dot, el.children[1]);
+    const fellow_dot = document.createElement("img");
+    fellow_dot.src = "https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png";
+    fellow_dot.style.width = "100%"
+
+    const text = document.createElement("p");
+    text.innerHTML += "Seu programa de relacionamento inteligente!";
+    text.style.fontFamily = "Ubuntu-Bold";
+    text.style.textAlign = "center";
+    text.style.verticalAlign = "middle"
+    text.style.display = "table-cell"
+    // text.style.height = "50%";
+
+    div.appendChild(left_div);
+    div.appendChild(right_div);
+    left_div.appendChild(fellow_dot);
+    right_div.appendChild(text);
+    
+    var form = document.getElementsByTagName('form')[0]    
+    form.insertBefore(div, form.children[1]);
 };
 
 var scripts = document.getElementsByTagName('script');

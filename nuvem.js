@@ -27,10 +27,11 @@ var myAppJavaScript = function(){
     const duloc = document.createElement("p");
     duloc.innerHTML += "Gostei de Duloc, muito limpa.";
 
-    const fellow_logo = document.createElement("img");
-    fellow_logo.src = 'https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png'
-
-    document.getElementsByTagName('form')[0].appendChild(fellow_logo);
+    const fellow_dot = document.createElement("img");
+    fellow_dot.src += "https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png";
+    
+    var el = document.getElementsByTagName('form')[0]
+    el.insertBefore(fellow_dot, el.children[1]);
 };
 
 var scripts = document.getElementsByTagName('script');
@@ -58,7 +59,7 @@ function parseQuery ( query ) {
 
 console.log("store = ", params["store"]);
 
-console.log(LS);
+// console.log(LS);
 
 // var reply_click = function(){
 //     var email = document.getElementById('fellow-email').value

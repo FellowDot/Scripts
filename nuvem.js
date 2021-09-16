@@ -38,13 +38,13 @@ var myAppJavaScript = function(){
 
     const left_div = document.createElement("div");
     left_div.id = "left_div"
-    left_div.style.width = "50%"
+    left_div.style.width = "30%"
     // left_div.style.border = "2px solid #bb6223"
     // left_div.style.borderRadius = "25px"
 
     const right_div = document.createElement("div");
     right_div.id = "right_div"
-    right_div.style.width = "50%"
+    right_div.style.width = "70%"
     right_div.style.display = "table"
     // right_div.style.border = "2px solid #bb6223"
     // right_div.style.borderRadius = "25px"

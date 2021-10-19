@@ -6,9 +6,32 @@ var loadScript = function(url, callback){
   
 };
 
-var first_screen_update = function(){
-    var main_div = document.getElementById('main_div')
-    main_div.hidden = true
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
+}
+
+var first_screen_update = async function(){
+    // var main_div = document.getElementById('main_div')
+    // main_div.hidden = true
+
+    var client = new HttpClient();
+    client.get('http://127.0.0.1:8000/batman', function(response) {
+        // do something with response
+        console.log(response);
+    });
+    
+        // let response = await fetch("http://127.0.0.1:8000/batman");
+        // let data = await response.json();
+
     // alert("Boo")
 }
 
@@ -74,7 +97,7 @@ var myAppJavaScript = function(){
             // text.style.height = "50%";
 
             // Create a form synamically
-            var login_form = document.createElement("form");
+            var login_form = document.createElement("div");
             login_form.id = "login_form"
             // login_form.setAttribute("method", "post");
             // login_form.setAttribute("action", "/");
@@ -222,59 +245,11 @@ var myAppJavaScript = function(){
             main_screen.appendChild(fellow_logo);
             main_screen.appendChild(fellow_modo);
             main_screen.appendChild(login_form);
-            // main_screen.appendChild(u);
+            main_screen.appendChild(u);
     nuvem_form.insertBefore(div2, nuvem_form.children[2]);
         div2.appendChild(profile_screen);
             profile_screen.appendChild(profile_name);
             profile_screen.appendChild(profile_stamp_sheet);
-        // div.appendChild(right_div);
-        //     right_div.appendChild(text);    
-
-
-        // // <div> lateral esquerda
-        // const left_div = document.createElement("div");
-        // left_div.id = "left_div"
-        // left_div.style.width = "30%"
-        // // left_div.style.border = "2px solid #bb6223"
-        // // left_div.style.borderRadius = "25px"
-        
-        //     // <img>
-        //     const fellow_logo = document.createElement("img");
-        //     fellow_logo.src = "https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png";
-        //     fellow_logo.style.width = "100%"
-
-        // // <div> lateral direita
-        // const right_div = document.createElement("div");
-        // right_div.id = "right_div"
-        // right_div.style.width = "70%"
-        // right_div.style.display = "table"
-        // // right_div.style.border = "2px solid #bb6223"
-        // // right_div.style.borderRadius = "25px"
-
-        //     // <p>
-        //     const text = document.createElement("p");
-        //     text.innerHTML += "Seu programa de relacionamento inteligente!";
-        //     text.style.fontFamily = "Ubuntu-Bold";
-        //     text.style.textAlign = "center";
-        //     text.style.verticalAlign = "middle"
-        //     text.style.display = "table-cell"
-        //     // text.style.height = "50%";
-
-            
-
-    // <div>
-    // ├──<left_div>
-    // │  ├──<fellow_logo>
-    // ├──<right_div>
-    // │  ├──<text>
-
-    // var form = document.getElementsByTagName('form')[0]    
-    
-    // form.insertBefore(div, form.children[1]);
-    //     div.appendChild(left_div);
-    //         left_div.appendChild(fellow_logo);
-    //     div.appendChild(right_div);
-    //         right_div.appendChild(text);    
 };
 
 var scripts = document.getElementsByTagName('script');
@@ -302,20 +277,6 @@ function parseQuery ( query ) {
     return Params;
 }
 
-// ### RECUPERA O STORE_ID DA LOJA QUANDO ELA CARREGA O JS
-// console.log("store = ", params["store"]);
-
-
-// console.log(LS);
-
-// var reply_click = function(){
-//     var email = document.getElementById('fellow-email').value
-//     var pwd = document.getElementById('fellow-password').value
-//     $('form').append("<p>Gostei de Duloc, bem limpa "+$.fn.jquery+'</p>');
-// }
-
-// document.getElementById('fellow-btn').onclick = reply_click;
-
 // ### ATIVA O FELLOE-E NO CHECKOUT DA NUVEM
 const DEBUG = true
 
@@ -325,30 +286,12 @@ if(DEBUG){
 
 document.getElementById('first_screen_update').onclick = first_screen_update
 
-
-
-// $(document).ready(function() {
-
-//     $('#submit').click(function() {
-
-//         $.ajax({
-//             type: "POST",
-//             url: 'login.php',
-//             data: {
-//                 username: $("#email").val(),
-//                 password: $("#password").val()
-//             },
-//             success: function(data)
-//             {
-//                 if (data === 'Correct') {
-//                     alert("Opa");
-//                 }
-//                 else {
-//                     alert(data);
-//                 }
-//             }
-//         });
-
-//     });
-
-// });
+function httpGetAsync(theUrl, callback){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}

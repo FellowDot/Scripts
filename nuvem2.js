@@ -6,6 +6,9 @@ var loadScript = function(url, callback){
   
 };
 
+var user = null
+var checkins = null
+
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
         var anHttpRequest = new XMLHttpRequest();
@@ -19,20 +22,156 @@ var HttpClient = function() {
     }
 }
 
-var first_screen_update = async function(){
-    // var main_div = document.getElementById('main_div')
-    // main_div.hidden = true
+var fellow_login = async function(){
 
-    var client = new HttpClient();
-    client.get('http://127.0.0.1:8000/batman', function(response) {
-        // do something with response
-        console.log(response);
-    });
+    var url = new URL('http://127.0.0.1:8000/batman')
+
+    var params = [
+        ['email', document.getElementById('email').value],
+        ['pwd', document.getElementById('password').value],
+        ['id_nuvem_company', 123456]
+    ]
+
+    console.log(params);
     
-        // let response = await fetch("http://127.0.0.1:8000/batman");
-        // let data = await response.json();
+    url.search = new URLSearchParams(params).toString();
+    
+    let response = await fetch(url);
+    let data = await response.json();
 
-    // alert("Boo")
+    data['checkins'].forEach(checkin => {
+        console.log(checkin);
+    });
+    console.log(data['user']);
+
+    user = data['user']
+    checkins = data['checkins']
+
+    console.log(data['checkins']);
+
+    second_screen();
+}
+
+var second_screen = function(){
+    // Nova <div> principal, janela toda na Nuvem
+    const div2 = document.createElement("div");
+    div2.id = "main_div"
+    div2.className = "float"
+    div2.style.width = "100%"
+    div2.style.display = "flex"
+    div2.style.flexDirection = "column"
+    div2.style.border = "1px solid rgba(67, 67, 67, 0.3)"
+    div2.style.borderRadius = "5px"
+    div2.style.marginBottom = "15px"
+
+        // ???? Tela de Perfil ???? //
+        // <div> lateral esquerda
+        const profile_screen = document.createElement("div");
+        profile_screen.id = "profile_screen"
+        profile_screen.style.display = "flex"
+        profile_screen.style.flexDirection = "column"
+        profile_screen.style.margin = "0 auto"
+        // left_div.style.width = "30%"
+        // left_div.style.border = "2px solid #bb6223"
+        // left_div.style.borderRadius = "25px"
+
+            // <p>
+            const profile_name = document.createElement("p");
+            profile_name.innerHTML += user ? user.name : '';
+            profile_name.style.fontFamily = "Ubuntu-Bold";
+            profile_name.style.textAlign = "center";
+            profile_name.style.verticalAlign = "middle"
+            // text.style.display = "table-cell"
+            // text.style.height = "50%";
+
+            // <div> lateral esquerda
+            const profile_stamp_sheet = document.createElement("div");
+            profile_stamp_sheet.id = "profile_screen"
+            profile_stamp_sheet.style.display = "flex"
+            profile_stamp_sheet.style.flexDirection = "row"
+            profile_stamp_sheet.style.margin = "0 auto"
+            // left_div.style.width = "30%"
+            // left_div.style.border = "2px solid #bb6223"
+            // left_div.style.borderRadius = "25px"
+
+                // <p>
+                const profile_stamp_sheet_title = document.createElement("p");
+                profile_stamp_sheet_title.innerHTML += "Cartela: ";
+                profile_stamp_sheet_title.style.fontFamily = "Ubuntu-Bold";
+                profile_stamp_sheet_title.style.textAlign = "center";
+                profile_stamp_sheet_title.style.verticalAlign = "middle"
+                // text.style.display = "table-cell"
+                // text.style.height = "50%";
+                profile_stamp_sheet.appendChild(profile_stamp_sheet_title);
+                
+                // for(var stamp in stamps){
+                //     // <p>
+                //     const stamp_element = document.createElement("p");
+                //     stamp_element.innerHTML += stamp.value;
+                //     stamp_element.style.fontFamily = "Ubuntu-Bold";
+                //     stamp_element.style.textAlign = "center";
+                //     stamp_element.style.verticalAlign = "middle"
+                //     // text.style.display = "table-cell"
+                //     // text.style.height = "50%";
+
+                //     profile_stamp_sheet.appendChild(stamp_element);
+                // }
+
+                var total = 0
+                
+                checkins.forEach(checkin => {
+                    total += checkin.stamp.value
+
+                    // <p>
+                    const stamp_element = document.createElement("p");
+                    stamp_element.innerHTML += "(" + checkin.stamp.value + ")";
+                    stamp_element.style.fontFamily = "Ubuntu-Bold";
+                    // stamp_element.style.textAlign = "center";
+                    // stamp_element.style.verticalAlign = "middle"
+                    // text.style.display = "table-cell"
+                    // text.style.height = "50%";
+
+                    profile_stamp_sheet.appendChild(stamp_element);
+
+                    // console.log(stamp.value)
+                })
+
+                // <p>
+                const stamp_element = document.createElement("p");
+                stamp_element.innerHTML += " = " + total;
+                stamp_element.style.fontFamily = "Ubuntu-Bold";
+                // stamp_element.style.textAlign = "center";
+                // stamp_element.style.verticalAlign = "middle"
+                // text.style.display = "table-cell"
+                // text.style.height = "50%";
+                profile_stamp_sheet.appendChild(stamp_element);
+
+            // <div> lateral esquerda
+            const profile_eldest_stamp = document.createElement("div");
+            profile_eldest_stamp.id = "profile_screen"
+            profile_eldest_stamp.style.display = "flex"
+            profile_eldest_stamp.style.flexDirection = "row"
+            profile_eldest_stamp.style.margin = "0 auto"
+            // left_div.style.width = "30%"
+            // left_div.style.border = "2px solid #bb6223"
+            // left_div.style.borderRadius = "25px"
+
+                // <p>
+                const profile_eldest_stamp_text = document.createElement("p");
+                profile_eldest_stamp_text.innerHTML += "Selo mais antigo: " + checkins[checkins.length - 1].stamp.dt_expiration;
+                profile_eldest_stamp_text.style.fontFamily = "Ubuntu-Bold";
+                profile_eldest_stamp_text.style.textAlign = "center";
+                profile_eldest_stamp_text.style.verticalAlign = "middle"
+                // text.style.display = "table-cell"
+                // text.style.height = "50%";
+                profile_eldest_stamp.appendChild(profile_eldest_stamp_text);
+    
+    var nuvem_form = document.getElementsByTagName('form')[0]  
+    nuvem_form.insertBefore(div2, nuvem_form.children[2]);
+        div2.appendChild(profile_screen);
+            profile_screen.appendChild(profile_name);
+            profile_screen.appendChild(profile_stamp_sheet);
+            profile_screen.appendChild(profile_eldest_stamp);
 }
 
 // ### O APP EM SI
@@ -136,107 +275,6 @@ var myAppJavaScript = function(){
             // u.setAttribute("type", "submit");
             u.setAttribute("value", "first_screen_update");
             login_form.append(u);
-
-    
-    // Nova <div> principal, janela toda na Nuvem
-    const div2 = document.createElement("div");
-    div2.id = "main_div"
-    div2.className = "float"
-    div2.style.width = "100%"
-    div2.style.display = "flex"
-    div2.style.flexDirection = "column"
-    div2.style.border = "1px solid rgba(67, 67, 67, 0.3)"
-    div2.style.borderRadius = "5px"
-    div2.style.marginBottom = "15px"
-
-        // ???? Tela de Perfil ???? //
-        // <div> lateral esquerda
-        const profile_screen = document.createElement("div");
-        profile_screen.id = "profile_screen"
-        profile_screen.style.display = "flex"
-        profile_screen.style.flexDirection = "column"
-        profile_screen.style.margin = "0 auto"
-        // left_div.style.width = "30%"
-        // left_div.style.border = "2px solid #bb6223"
-        // left_div.style.borderRadius = "25px"
-
-            // <p>
-            const profile_name = document.createElement("p");
-            profile_name.innerHTML += "João Marcos de Freitas";
-            profile_name.style.fontFamily = "Ubuntu-Bold";
-            profile_name.style.textAlign = "center";
-            profile_name.style.verticalAlign = "middle"
-            // text.style.display = "table-cell"
-            // text.style.height = "50%";
-
-            var stamps = [
-                {value: 10},
-                {value: 5},
-                {value: 10}
-            ]
-
-            // <div> lateral esquerda
-            const profile_stamp_sheet = document.createElement("div");
-            profile_stamp_sheet.id = "profile_screen"
-            profile_stamp_sheet.style.display = "flex"
-            profile_stamp_sheet.style.flexDirection = "row"
-            profile_stamp_sheet.style.margin = "0 auto"
-            // left_div.style.width = "30%"
-            // left_div.style.border = "2px solid #bb6223"
-            // left_div.style.borderRadius = "25px"
-
-                // <p>
-                const profile_stamp_sheet_title = document.createElement("p");
-                profile_stamp_sheet_title.innerHTML += "Cartela: ";
-                profile_stamp_sheet_title.style.fontFamily = "Ubuntu-Bold";
-                profile_stamp_sheet_title.style.textAlign = "center";
-                profile_stamp_sheet_title.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_stamp_sheet.appendChild(profile_stamp_sheet_title);
-                
-                // for(var stamp in stamps){
-                //     // <p>
-                //     const stamp_element = document.createElement("p");
-                //     stamp_element.innerHTML += stamp.value;
-                //     stamp_element.style.fontFamily = "Ubuntu-Bold";
-                //     stamp_element.style.textAlign = "center";
-                //     stamp_element.style.verticalAlign = "middle"
-                //     // text.style.display = "table-cell"
-                //     // text.style.height = "50%";
-
-                //     profile_stamp_sheet.appendChild(stamp_element);
-                // }
-
-                var total = 0
-                
-                stamps.forEach(stamp => {
-                    total += stamp.value
-
-                    // <p>
-                    const stamp_element = document.createElement("p");
-                    stamp_element.innerHTML += "(" + stamp.value + ")";
-                    stamp_element.style.fontFamily = "Ubuntu-Bold";
-                    // stamp_element.style.textAlign = "center";
-                    // stamp_element.style.verticalAlign = "middle"
-                    // text.style.display = "table-cell"
-                    // text.style.height = "50%";
-
-                    profile_stamp_sheet.appendChild(stamp_element);
-
-                    // console.log(stamp.value)
-                })
-
-                // <p>
-                const stamp_element = document.createElement("p");
-                stamp_element.innerHTML += " = " + total;
-                stamp_element.style.fontFamily = "Ubuntu-Bold";
-                // stamp_element.style.textAlign = "center";
-                // stamp_element.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_stamp_sheet.appendChild(stamp_element);
-
     
     // Insere no HTML
     var nuvem_form = document.getElementsByTagName('form')[0]    
@@ -246,10 +284,7 @@ var myAppJavaScript = function(){
             main_screen.appendChild(fellow_modo);
             main_screen.appendChild(login_form);
             main_screen.appendChild(u);
-    nuvem_form.insertBefore(div2, nuvem_form.children[2]);
-        div2.appendChild(profile_screen);
-            profile_screen.appendChild(profile_name);
-            profile_screen.appendChild(profile_stamp_sheet);
+    
 };
 
 var scripts = document.getElementsByTagName('script');
@@ -284,7 +319,7 @@ if(DEBUG){
     myAppJavaScript();
 }
 
-document.getElementById('first_screen_update').onclick = first_screen_update
+document.getElementById('first_screen_update').onclick = fellow_login
 
 function httpGetAsync(theUrl, callback){
     var xmlHttp = new XMLHttpRequest();

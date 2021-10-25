@@ -8,6 +8,7 @@ var loadScript = function(url, callback){
 
 var user = null
 var checkins = null
+var redeem = null
 
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -46,8 +47,9 @@ var fellow_login = async function(){
 
     user = data['user']
     checkins = data['checkins']
+    redeem = data['redeem']
 
-    console.log(data['checkins']);
+    console.log(data['redeem']);
 
     second_screen();
 }
@@ -124,7 +126,7 @@ var second_screen = function(){
 
                     // <p>
                     const stamp_element = document.createElement("p");
-                    stamp_element.innerHTML += "(" + checkin.stamp.value + ")";
+                    stamp_element.innerHTML += "[" + checkin.stamp.value + "]";
                     stamp_element.style.fontFamily = "Ubuntu-Bold";
                     // stamp_element.style.textAlign = "center";
                     // stamp_element.style.verticalAlign = "middle"
@@ -148,7 +150,7 @@ var second_screen = function(){
 
             // <div> lateral esquerda
             const profile_eldest_stamp = document.createElement("div");
-            profile_eldest_stamp.id = "profile_screen"
+            profile_eldest_stamp.id = "profile_eldest_stamp"
             profile_eldest_stamp.style.display = "flex"
             profile_eldest_stamp.style.flexDirection = "row"
             profile_eldest_stamp.style.margin = "0 auto"
@@ -165,6 +167,26 @@ var second_screen = function(){
                 // text.style.display = "table-cell"
                 // text.style.height = "50%";
                 profile_eldest_stamp.appendChild(profile_eldest_stamp_text);
+            
+            // <div> lateral esquerda
+            const profile_redeem = document.createElement("div");
+            profile_redeem.id = "profile_redeem"
+            profile_redeem.style.display = "flex"
+            profile_redeem.style.flexDirection = "row"
+            profile_redeem.style.margin = "0 auto"
+            // left_div.style.width = "30%"
+            // left_div.style.border = "2px solid #bb6223"
+            // left_div.style.borderRadius = "25px"
+
+                // <p>
+                const profile_redeem_can = document.createElement("p");
+                profile_redeem_can.innerHTML += redeem.eligible ? ("Você pode realizar um resgate de " + redeem.value) : "";
+                profile_redeem_can.style.fontFamily = "Ubuntu-Bold";
+                profile_redeem_can.style.textAlign = "center";
+                profile_redeem_can.style.verticalAlign = "middle"
+                // text.style.display = "table-cell"
+                // text.style.height = "50%";
+                profile_redeem.appendChild(profile_redeem_can);
     
     var nuvem_form = document.getElementsByTagName('form')[0]  
     nuvem_form.insertBefore(div2, nuvem_form.children[2]);
@@ -172,6 +194,7 @@ var second_screen = function(){
             profile_screen.appendChild(profile_name);
             profile_screen.appendChild(profile_stamp_sheet);
             profile_screen.appendChild(profile_eldest_stamp);
+            profile_screen.appendChild(profile_redeem);
 }
 
 // ### O APP EM SI

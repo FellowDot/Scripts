@@ -9,6 +9,7 @@ var loadScript = function(url, callback){
 var user = null
 var checkins = null
 var redeem = null
+var company = null
 
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -23,14 +24,44 @@ var HttpClient = function() {
     }
 }
 
+function css(element, style) {
+    for (const property in style)
+        element.style[property] = style[property];
+}
+
+var Div = function(id, className, style){
+    const div = document.createElement("div");
+    div.id = id
+    div.className = className
+    
+    css(div, {
+        'background-color': 'yellow',
+        color: 'red'
+    });
+
+    return div
+}
+
+var P = function(id){
+    const p = document.createElement("div");
+    if(id)
+        p.id = id
+    p.innerHTML += user ? user.name : '';
+    p.style.fontFamily = "Ubuntu-Bold";
+    p.style.textAlign = "center";
+    p.style.verticalAlign = "middle"
+
+    return p
+}
+
 var fellow_login = async function(){
 
-    var url = new URL('http://127.0.0.1:8000/batman')
+    var url = new URL('http://127.0.0.1:8000/profile')
 
     var params = [
         ['email', document.getElementById('email').value],
         ['pwd', document.getElementById('password').value],
-        ['id_nuvem_company', 123456]
+        ['id_nuvem_company', 1643050]
     ]
 
     console.log(params);
@@ -48,8 +79,9 @@ var fellow_login = async function(){
     user = data['user']
     checkins = data['checkins']
     redeem = data['redeem']
+    company = data['company']
 
-    console.log(data['redeem']);
+    console.log(data['chk']);
 
     second_screen();
 }
@@ -120,13 +152,14 @@ var second_screen = function(){
                 // }
 
                 var total = 0
+                var stamp = 0
                 
                 checkins.forEach(checkin => {
                     total += checkin.stamp.value
 
                     // <p>
                     const stamp_element = document.createElement("p");
-                    stamp_element.innerHTML += "[" + checkin.stamp.value + "]";
+                    stamp_element.innerHTML += (stamp % company.min_stamps === 0 ? "|" : "") + "(" + checkin.stamp.value + ")";
                     stamp_element.style.fontFamily = "Ubuntu-Bold";
                     // stamp_element.style.textAlign = "center";
                     // stamp_element.style.verticalAlign = "middle"
@@ -136,6 +169,8 @@ var second_screen = function(){
                     profile_stamp_sheet.appendChild(stamp_element);
 
                     // console.log(stamp.value)
+                    // console.log(stamp.value)
+                    stamp += 1
                 })
 
                 // <p>
@@ -270,6 +305,7 @@ var myAppJavaScript = function(){
                 ID.setAttribute("type", "text");
                 ID.setAttribute("name", "email");
                 ID.setAttribute("placeholder", "E-Mail");
+                ID.setAttribute("value", "joao@fellow.com");
 
                 // Create an input element for password
                 var PWD = document.createElement("input");

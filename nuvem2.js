@@ -6,6 +6,9 @@ var loadScript = function(url, callback){
   
 };
 
+// const BASE_URI = "http://127.0.0.1:8000/"
+const BASE_URI = "https://e.fellowdot.com/"
+
 var user = null
 var checkins = null
 var redeem = null
@@ -58,7 +61,7 @@ var P = function(id){
 
 var fellow_login = async function(){
 
-    var url = new URL('http://127.0.0.1:8000/profile')
+    var url = new URL(BASE_URI +  'profile')
 
     var params = [
         ['email', document.getElementById('email').value],
@@ -84,7 +87,7 @@ var fellow_login = async function(){
 }
 
 var fellow_redeem = async function(){
-    var url = new URL('http://127.0.0.1:8000/coupons/create')
+    var url = new URL(BASE_URI + 'coupons/create')
 
     var params = [
         ['email', document.getElementById('email').value],

@@ -120,7 +120,7 @@ var fifth_screen = function(){
     fifth_screen.style.marginBottom = "15px"
 
     var nuvem_form = document.getElementsByTagName('form')[0]
-    nuvem_form.insertBefore(fifth_screen, nuvem_form.children[4]);
+    nuvem_form.insertBefore(fifth_screen, nuvem_form.children[5]);
 
         // <div> lateral esquerda
         const coupon_screen = document.createElement("div");
@@ -278,7 +278,7 @@ var second_screen = function(){
     second_main_div.style.marginBottom = "15px"
 
     var nuvem_form = document.getElementsByTagName('form')[0]
-    nuvem_form.insertBefore(second_main_div, nuvem_form.children[3]);
+    nuvem_form.insertBefore(second_main_div, nuvem_form.children[2]);
 
         // <div> lateral esquerda
         const profile_screen = document.createElement("div");

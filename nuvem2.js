@@ -418,10 +418,9 @@ var myAppJavaScript = function(){
                 
 
             // Create a submit button
-            var u = document.createElement("input");
+            var u = document.createElement("p");
             u.id = "first_screen_update"
-            // u.setAttribute("type", "submit");
-            u.setAttribute("value", "Login");
+            u.innerHTML += "Login";
             login_form.append(u);
     
     // Insere no HTML

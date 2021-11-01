@@ -10,6 +10,8 @@ var user = null
 var checkins = null
 var redeem = null
 var company = null
+var sheets = null
+var coupon = null
 
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -63,173 +65,257 @@ var fellow_login = async function(){
         ['pwd', document.getElementById('password').value],
         ['id_nuvem_company', 1643050]
     ]
-
-    console.log(params);
     
     url.search = new URLSearchParams(params).toString();
     
     let response = await fetch(url);
     let data = await response.json();
 
-    data['checkins'].forEach(checkin => {
-        console.log(checkin);
-    });
-    console.log(data['user']);
-
     user = data['user']
-    checkins = data['checkins']
-    redeem = data['redeem']
+    sheets = data['chk']
     company = data['company']
+    to_expire = data['to_expire']
 
-    console.log(data['chk']);
+    console.log(to_expire)
 
     second_screen();
+    third_screen();
+    fourth_screen();
+}
+
+var fellow_redeem = async function(){
+    var url = new URL('http://127.0.0.1:8000/coupons/create')
+
+    var params = [
+        ['email', document.getElementById('email').value],
+        ['company_nuvem_id', 1643050],
+        ['value', sheets[0].value],
+    ]
+    
+    url.search = new URLSearchParams(params).toString();
+    
+    let response = await fetch(url);
+    let data = await response.json();
+
+    console.log(data);
+
+    coupon = data['coupon']
+
+    fifth_screen();
+}
+
+var fifth_screen = function(){
+    // Nova <div> principal, janela toda na Nuvem
+    const fifth_screen = document.createElement("div");
+    fifth_screen.id = "fifth_screen"
+    fifth_screen.className = "float"
+    fifth_screen.style.width = "100%"
+    fifth_screen.style.display = "flex"
+    fifth_screen.style.flexDirection = "column"
+    fifth_screen.style.border = "1px solid rgba(67, 67, 67, 0.3)"
+    fifth_screen.style.borderRadius = "5px"
+    fifth_screen.style.marginBottom = "15px"
+
+    var nuvem_form = document.getElementsByTagName('form')[0]
+    nuvem_form.insertBefore(fifth_screen, nuvem_form.children[4]);
+
+        // <div> lateral esquerda
+        const coupon_screen = document.createElement("div");
+        coupon_screen.id = "redeem"
+        coupon_screen.style.display = "flex"
+        coupon_screen.style.flexDirection = "column"
+        coupon_screen.style.margin = "0 auto"
+        fifth_screen.appendChild(coupon_screen);
+
+            // <p>
+            const coupon_text_code = document.createElement("p");
+            coupon_text_code.innerHTML = 'Código do cupom resgatado: ' + coupon.code;
+            coupon_text_code.style.fontFamily = "Ubuntu-Bold";
+            coupon_text_code.style.textAlign = "center";
+            coupon_text_code.style.verticalAlign = "middle"
+            coupon_screen.appendChild(coupon_text_code);
+
+            // <p>
+            const coupon_text_value = document.createElement("p");
+            coupon_text_value.innerHTML = 'Valor do cupom resgatado: R$' + coupon.value;
+            coupon_text_value.style.fontFamily = "Ubuntu-Bold";
+            coupon_text_value.style.textAlign = "center";
+            coupon_text_value.style.verticalAlign = "middle"
+            coupon_screen.appendChild(coupon_text_value);
+
+            // <p>
+            const coupon_text_expiration = document.createElement("p");
+            coupon_text_expiration.innerHTML = 'Validade do cupom resgatado: ' + coupon.end_date;
+            coupon_text_expiration.style.fontFamily = "Ubuntu-Bold";
+            coupon_text_expiration.style.textAlign = "center";
+            coupon_text_expiration.style.verticalAlign = "middle"
+            coupon_screen.appendChild(coupon_text_expiration);
+
+            // <p>
+            const coupon_text_apply = document.createElement("p");
+            coupon_text_apply.innerHTML = 'Insira no carrinho antes de finalizar a compra!';
+            coupon_text_apply.style.fontFamily = "Ubuntu-Bold";
+            coupon_text_apply.style.textAlign = "center";
+            coupon_text_apply.style.verticalAlign = "middle"
+            coupon_screen.appendChild(coupon_text_apply);
+}
+
+var fourth_screen = function(){
+    // Nova <div> principal, janela toda na Nuvem
+    const fourth_screen = document.createElement("div");
+    fourth_screen.id = "fourth_screen"
+    fourth_screen.className = "float"
+    fourth_screen.style.width = "100%"
+    fourth_screen.style.display = "flex"
+    fourth_screen.style.flexDirection = "column"
+    fourth_screen.style.border = "1px solid rgba(67, 67, 67, 0.3)"
+    fourth_screen.style.borderRadius = "5px"
+    fourth_screen.style.marginBottom = "15px"
+
+    var nuvem_form = document.getElementsByTagName('form')[0]
+    nuvem_form.insertBefore(fourth_screen, nuvem_form.children[4]);
+
+        // <div> lateral esquerda
+        const redeem_screen = document.createElement("div");
+        redeem_screen.id = "redeem"
+        redeem_screen.style.display = "flex"
+        redeem_screen.style.flexDirection = "column"
+        redeem_screen.style.margin = "0 auto"
+        fourth_screen.appendChild(redeem_screen);
+
+            if(sheets[0] != null & sheets[0].eligible){
+                // <p>
+                const redeem_eligible_text = document.createElement("p");
+                redeem_eligible_text.innerHTML += 'Você pode fazer um resgate de R$' + sheets[0].value;
+                redeem_eligible_text.style.fontFamily = "Ubuntu-Bold";
+                redeem_eligible_text.style.textAlign = "left";
+                redeem_eligible_text.style.verticalAlign = "middle"
+                redeem_screen.appendChild(redeem_eligible_text);
+
+                // <p>
+                const redeem_eligible_button = document.createElement("p");
+                redeem_eligible_button.id = "redeem_eligible_button"
+                redeem_eligible_button.innerHTML += '<b>Resgatar</b>';
+                redeem_eligible_button.style.fontFamily = "Ubuntu-Bold";
+                redeem_eligible_button.style.textAlign = "center";
+                redeem_eligible_button.style.verticalAlign = "middle"
+                redeem_screen.appendChild(redeem_eligible_button);
+
+                document.getElementById('redeem_eligible_button').onclick = fellow_redeem
+            }
+            else{
+                // <p>
+                const redeem_eligible_text = document.createElement("p");
+                redeem_eligible_text.innerHTML += 'Você não pode fazer nenhum resgate';
+                redeem_eligible_text.style.fontFamily = "Ubuntu-Bold";
+                redeem_eligible_text.style.textAlign = "left";
+                redeem_eligible_text.style.verticalAlign = "middle"
+                redeem_screen.appendChild(redeem_eligible_text);
+            }
+}
+
+var third_screen = function(){
+    // Nova <div> principal, janela toda na Nuvem
+    const third_main_div = document.createElement("div");
+    third_main_div.id = "third_main_div"
+    third_main_div.className = "float"
+    third_main_div.style.width = "100%"
+    third_main_div.style.display = "flex"
+    third_main_div.style.flexDirection = "column"
+    third_main_div.style.border = "1px solid rgba(67, 67, 67, 0.3)"
+    third_main_div.style.borderRadius = "5px"
+    third_main_div.style.marginBottom = "15px"
+
+    var nuvem_form = document.getElementsByTagName('form')[0]
+    nuvem_form.insertBefore(third_main_div, nuvem_form.children[3]);
+
+        // <div> lateral esquerda
+        const sheets_screen = document.createElement("div");
+        sheets_screen.id = "sheets"
+        sheets_screen.style.display = "flex"
+        sheets_screen.style.flexDirection = "column"
+        sheets_screen.style.margin = "0 auto"
+        third_main_div.appendChild(sheets_screen);
+
+            // <p>
+            const sheet_screen_title = document.createElement("p");
+            sheet_screen_title.innerHTML += 'Cartelas';
+            sheet_screen_title.style.fontFamily = "Ubuntu-Bold";
+            sheet_screen_title.style.textAlign = "center";
+            sheet_screen_title.style.verticalAlign = "middle"
+            sheets_screen.appendChild(sheet_screen_title);
+
+            sheets.forEach(sheet => {
+                // <p>
+                const sheet_screen = document.createElement("p");
+                sheet_screen.innerHTML += 'Cartela: ';
+                sheet_screen.style.fontFamily = "Ubuntu-Bold";
+                sheet_screen.style.textAlign = "left";
+                sheet_screen.style.verticalAlign = "middle"
+                sheets_screen.appendChild(sheet_screen);
+
+                sheet.sheet.forEach(stamp => {
+                    sheet_screen.innerHTML += '(' + stamp.stamp.value + ') ';
+                });
+
+                sheet_screen.innerHTML += '= ' + sheet.value;
+            });
 }
 
 var second_screen = function(){
     // Nova <div> principal, janela toda na Nuvem
-    const div2 = document.createElement("div");
-    div2.id = "main_div"
-    div2.className = "float"
-    div2.style.width = "100%"
-    div2.style.display = "flex"
-    div2.style.flexDirection = "column"
-    div2.style.border = "1px solid rgba(67, 67, 67, 0.3)"
-    div2.style.borderRadius = "5px"
-    div2.style.marginBottom = "15px"
+    const second_main_div = document.createElement("div");
+    second_main_div.id = "second_main_div"
+    second_main_div.className = "float"
+    second_main_div.style.width = "100%"
+    second_main_div.style.display = "flex"
+    second_main_div.style.flexDirection = "column"
+    second_main_div.style.border = "1px solid rgba(67, 67, 67, 0.3)"
+    second_main_div.style.borderRadius = "5px"
+    second_main_div.style.marginBottom = "15px"
 
-        // ???? Tela de Perfil ???? //
+    var nuvem_form = document.getElementsByTagName('form')[0]
+    nuvem_form.insertBefore(second_main_div, nuvem_form.children[3]);
+
         // <div> lateral esquerda
         const profile_screen = document.createElement("div");
-        profile_screen.id = "profile_screen"
+        profile_screen.id = "sheets"
         profile_screen.style.display = "flex"
         profile_screen.style.flexDirection = "column"
         profile_screen.style.margin = "0 auto"
-        // left_div.style.width = "30%"
-        // left_div.style.border = "2px solid #bb6223"
-        // left_div.style.borderRadius = "25px"
+        second_main_div.appendChild(profile_screen);
 
             // <p>
-            const profile_name = document.createElement("p");
-            profile_name.innerHTML += user ? user.name : '';
-            profile_name.style.fontFamily = "Ubuntu-Bold";
-            profile_name.style.textAlign = "center";
-            profile_name.style.verticalAlign = "middle"
-            // text.style.display = "table-cell"
-            // text.style.height = "50%";
-
-            // <div> lateral esquerda
-            const profile_stamp_sheet = document.createElement("div");
-            profile_stamp_sheet.id = "profile_screen"
-            profile_stamp_sheet.style.display = "flex"
-            profile_stamp_sheet.style.flexDirection = "row"
-            profile_stamp_sheet.style.margin = "0 auto"
-            // left_div.style.width = "30%"
-            // left_div.style.border = "2px solid #bb6223"
-            // left_div.style.borderRadius = "25px"
-
-                // <p>
-                const profile_stamp_sheet_title = document.createElement("p");
-                profile_stamp_sheet_title.innerHTML += "Cartela: ";
-                profile_stamp_sheet_title.style.fontFamily = "Ubuntu-Bold";
-                profile_stamp_sheet_title.style.textAlign = "center";
-                profile_stamp_sheet_title.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_stamp_sheet.appendChild(profile_stamp_sheet_title);
-                
-                // for(var stamp in stamps){
-                //     // <p>
-                //     const stamp_element = document.createElement("p");
-                //     stamp_element.innerHTML += stamp.value;
-                //     stamp_element.style.fontFamily = "Ubuntu-Bold";
-                //     stamp_element.style.textAlign = "center";
-                //     stamp_element.style.verticalAlign = "middle"
-                //     // text.style.display = "table-cell"
-                //     // text.style.height = "50%";
-
-                //     profile_stamp_sheet.appendChild(stamp_element);
-                // }
-
-                var total = 0
-                var stamp = 0
-                
-                checkins.forEach(checkin => {
-                    total += checkin.stamp.value
-
-                    // <p>
-                    const stamp_element = document.createElement("p");
-                    stamp_element.innerHTML += (stamp % company.min_stamps === 0 ? "|" : "") + "(" + checkin.stamp.value + ")";
-                    stamp_element.style.fontFamily = "Ubuntu-Bold";
-                    // stamp_element.style.textAlign = "center";
-                    // stamp_element.style.verticalAlign = "middle"
-                    // text.style.display = "table-cell"
-                    // text.style.height = "50%";
-
-                    profile_stamp_sheet.appendChild(stamp_element);
-
-                    // console.log(stamp.value)
-                    // console.log(stamp.value)
-                    stamp += 1
-                })
-
-                // <p>
-                const stamp_element = document.createElement("p");
-                stamp_element.innerHTML += " = " + total;
-                stamp_element.style.fontFamily = "Ubuntu-Bold";
-                // stamp_element.style.textAlign = "center";
-                // stamp_element.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_stamp_sheet.appendChild(stamp_element);
-
-            // <div> lateral esquerda
-            const profile_eldest_stamp = document.createElement("div");
-            profile_eldest_stamp.id = "profile_eldest_stamp"
-            profile_eldest_stamp.style.display = "flex"
-            profile_eldest_stamp.style.flexDirection = "row"
-            profile_eldest_stamp.style.margin = "0 auto"
-            // left_div.style.width = "30%"
-            // left_div.style.border = "2px solid #bb6223"
-            // left_div.style.borderRadius = "25px"
-
-                // <p>
-                const profile_eldest_stamp_text = document.createElement("p");
-                profile_eldest_stamp_text.innerHTML += "Selo mais antigo: " + checkins[checkins.length - 1].stamp.dt_expiration;
-                profile_eldest_stamp_text.style.fontFamily = "Ubuntu-Bold";
-                profile_eldest_stamp_text.style.textAlign = "center";
-                profile_eldest_stamp_text.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_eldest_stamp.appendChild(profile_eldest_stamp_text);
+            const profile_screen_title = document.createElement("p");
+            profile_screen_title.innerHTML += 'Perfil';
+            profile_screen_title.style.fontFamily = "Ubuntu-Bold";
+            profile_screen_title.style.textAlign = "center";
+            profile_screen_title.style.verticalAlign = "middle"
+            profile_screen.appendChild(profile_screen_title);
             
-            // <div> lateral esquerda
-            const profile_redeem = document.createElement("div");
-            profile_redeem.id = "profile_redeem"
-            profile_redeem.style.display = "flex"
-            profile_redeem.style.flexDirection = "row"
-            profile_redeem.style.margin = "0 auto"
-            // left_div.style.width = "30%"
-            // left_div.style.border = "2px solid #bb6223"
-            // left_div.style.borderRadius = "25px"
+            // <p>
+            const profile_screen_picture = document.createElement("p");
+            profile_screen_picture.innerHTML +=  'Foto: ' + '=D';
+            profile_screen_picture.style.fontFamily = "Ubuntu-Bold";
+            profile_screen_picture.style.textAlign = "left";
+            profile_screen_picture.style.verticalAlign = "middle"
+            profile_screen.appendChild(profile_screen_picture);
 
-                // <p>
-                const profile_redeem_can = document.createElement("p");
-                profile_redeem_can.innerHTML += redeem.eligible ? ("Você pode realizar um resgate de " + redeem.value) : "";
-                profile_redeem_can.style.fontFamily = "Ubuntu-Bold";
-                profile_redeem_can.style.textAlign = "center";
-                profile_redeem_can.style.verticalAlign = "middle"
-                // text.style.display = "table-cell"
-                // text.style.height = "50%";
-                profile_redeem.appendChild(profile_redeem_can);
-    
-    var nuvem_form = document.getElementsByTagName('form')[0]  
-    nuvem_form.insertBefore(div2, nuvem_form.children[2]);
-        div2.appendChild(profile_screen);
-            profile_screen.appendChild(profile_name);
-            profile_screen.appendChild(profile_stamp_sheet);
-            profile_screen.appendChild(profile_eldest_stamp);
-            profile_screen.appendChild(profile_redeem);
+            // <p>
+            const profile_screen_name = document.createElement("p");
+            profile_screen_name.innerHTML +=  'Nome: ' + (user ? user.name : '');
+            profile_screen_name.style.fontFamily = "Ubuntu-Bold";
+            profile_screen_name.style.textAlign = "left";
+            profile_screen_name.style.verticalAlign = "middle"
+            profile_screen.appendChild(profile_screen_name);
+
+            // <p>
+            const profile_screen_next_expiration = document.createElement("p");
+            profile_screen_next_expiration.innerHTML +=  'Próximo selo expira em ' + to_expire.stamp.dt_expiration + ' no valor de R$' + to_expire.stamp.value;
+            profile_screen_next_expiration.style.fontFamily = "Ubuntu-Bold";
+            profile_screen_next_expiration.style.textAlign = "left";
+            profile_screen_next_expiration.style.verticalAlign = "middle"
+            profile_screen.appendChild(profile_screen_next_expiration);
 }
 
 // ### O APP EM SI
@@ -314,25 +400,25 @@ var myAppJavaScript = function(){
                 PWD.setAttribute("name", "password");
                 PWD.setAttribute("placeholder", "Password");
 
-                // Create a submit button
-                var s = document.createElement("input");
-                s.setAttribute("id", "submit");
-                s.setAttribute("type", "submit");
-                s.setAttribute("value", "Submit");
+                // // Create a submit button
+                // var s = document.createElement("input");
+                // s.setAttribute("id", "submit");
+                // s.setAttribute("type", "submit");
+                // s.setAttribute("value", "Submit");
 
                 // Append the email_ID input to the form
                 login_form.append(ID);                 
                 // Append the password to the form
                 login_form.append(PWD);                 
-                // Append the button to the form
-                login_form.append(s);
+                // // Append the button to the form
+                // login_form.append(s);
                 
 
             // Create a submit button
             var u = document.createElement("input");
             u.id = "first_screen_update"
             // u.setAttribute("type", "submit");
-            u.setAttribute("value", "first_screen_update");
+            u.setAttribute("value", "Login");
             login_form.append(u);
     
     // Insere no HTML

@@ -6,8 +6,8 @@ var loadScript = function(url, callback){
   
 };
 
-// const BASE_URI = "http://127.0.0.1:8000/"
-const BASE_URI = "https://e.fellowdot.com/"
+const BASE_URI = "http://127.0.0.1:8000/"
+// const BASE_URI = "https://e.fellowdot.com/"
 
 var user = null
 var checkins = null

@@ -308,7 +308,8 @@ const DEBUG = true
 
 if(DEBUG){
     fellow_login();
-    document.cookie = 'token=tokenhere; expires=3 Nov 2021 17:51:00 UTC; path=/'
 }
 
-// console.log(LS);
+console.log(LS);
+
+document.cookie = 'username=Fellow'

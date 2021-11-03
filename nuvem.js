@@ -9,19 +9,116 @@ var loadScript = function(url, callback){
 // const BASE_URI = "http://127.0.0.1:8000/"
 const BASE_URI = "https://e.fellowdot.com/"
 
-var modalElement = function(){
-    // <!-- The Modal -->
-    // <div id="myModal" class="modal">
+var user = null
+var sheets = null
+var company = null
+var to_expire = null
 
-    //     <!-- Modal content -->
-    //     <div class="modal-content">
-    //         <span class="close">&times;</span>
-    //         <p>Some text in the Modal..</p>
-    //     </div>
+var fellow_login = async function(){
 
-    // </div>
+    var url = new URL(BASE_URI +  'profile')
 
+    var params = [
+        ['email', 'joao@fellow.com'],
+        ['pwd', '123'],
+        ['id_nuvem_company', 1643050]
+    ]
+    
+    url.search = new URLSearchParams(params).toString();
+    
+    let response = await fetch(url);
+    let data = await response.json();
+
+    user = data['user']
+    sheets = data['chk']
+    company = data['company']
+    to_expire = data['to_expire']
+
+    myAppJavaScript();
+}
+
+var fillSheets = function(modal_content){
     // <div> lateral esquerda
+    const sheets_screen = document.createElement("div");
+    sheets_screen.id = "sheets"
+    sheets_screen.style.display = "flex"
+    sheets_screen.style.flexDirection = "column"
+    sheets_screen.style.margin = "0 auto"
+
+        // <p>
+        const sheet_screen_title = document.createElement("p");
+        sheet_screen_title.innerHTML += 'Cartelas';
+        sheet_screen_title.style.fontFamily = "Ubuntu-Bold";
+        sheet_screen_title.style.textAlign = "center";
+        sheet_screen_title.style.verticalAlign = "middle"
+        sheets_screen.appendChild(sheet_screen_title);
+
+        sheets.forEach(sheet => {
+            // <p>
+            const sheet_screen = document.createElement("p");
+            sheet_screen.innerHTML += 'Cartela: ';
+            sheet_screen.style.fontFamily = "Ubuntu-Bold";
+            sheet_screen.style.textAlign = "left";
+            sheet_screen.style.verticalAlign = "middle"
+            sheets_screen.appendChild(sheet_screen);
+
+            sheet.sheet.forEach(stamp => {
+                sheet_screen.innerHTML += '(' + stamp.stamp.value + ') ';
+            });
+
+            sheet_screen.innerHTML += '= ' + sheet.value;
+
+            if(sheet.eligible){
+                sheet_screen.innerHTML += ' esperando você resgatar!';
+            }
+        });
+    
+    modal_content.appendChild(sheets_screen);
+}
+
+var fillProfile = function(modal_content){
+    // <div> lateral esquerda
+    const profile_screen = document.createElement("div");
+    profile_screen.id = "sheets"
+    profile_screen.style.display = "flex"
+    profile_screen.style.flexDirection = "column"
+    profile_screen.style.margin = "0 auto"
+
+        // <p>
+        const profile_screen_title = document.createElement("p");
+        profile_screen_title.innerHTML += 'Perfil';
+        profile_screen_title.style.fontFamily = "Ubuntu-Bold";
+        profile_screen_title.style.textAlign = "center";
+        profile_screen_title.style.verticalAlign = "middle"
+        profile_screen.appendChild(profile_screen_title);
+        
+        // <p>
+        const profile_screen_picture = document.createElement("p");
+        profile_screen_picture.innerHTML +=  'Foto: ' + '=D';
+        profile_screen_picture.style.fontFamily = "Ubuntu-Bold";
+        profile_screen_picture.style.textAlign = "left";
+        profile_screen_picture.style.verticalAlign = "middle"
+        profile_screen.appendChild(profile_screen_picture);
+
+        // <p>
+        const profile_screen_name = document.createElement("p");
+        profile_screen_name.innerHTML +=  'Nome: ' + (user ? user.name : '');
+        profile_screen_name.style.fontFamily = "Ubuntu-Bold";
+        profile_screen_name.style.textAlign = "left";
+        profile_screen_name.style.verticalAlign = "middle"
+        profile_screen.appendChild(profile_screen_name);
+
+        // <p>
+        const profile_screen_next_expiration = document.createElement("p");
+        profile_screen_next_expiration.innerHTML +=  'Próximo selo expira em ' + to_expire.stamp.dt_expiration + ' no valor de R$' + to_expire.stamp.value;
+        profile_screen_next_expiration.style.fontFamily = "Ubuntu-Bold";
+        profile_screen_next_expiration.style.textAlign = "left";
+        profile_screen_next_expiration.style.verticalAlign = "middle"
+        profile_screen.appendChild(profile_screen_next_expiration);
+    
+    modal_content.appendChild(profile_screen);
+
+    fillSheets(modal_content);
 }
 
 var fillModal = function(modal_content){
@@ -33,6 +130,8 @@ var fillModal = function(modal_content){
     fellow_logo.style.verticalAlign = "middle"
 
     modal_content.appendChild(fellow_logo);
+
+    fillProfile(modal_content);
 }
 
 var createModal = function(modal_link){
@@ -76,13 +175,13 @@ var createModal = function(modal_link){
 
             modal_content.appendChild(modal_span);
 
-            // <p>
-            const modal_text = document.createElement("p");
-            modal_text.innerHTML = 'Meu Fellow';
-            modal_text.style.fontFamily = "Ubuntu-Bold";
-            modal_text.style.textAlign = "center";
-            modal_text.style.verticalAlign = "middle";
-            modal_content.appendChild(modal_text);
+            // // <p>
+            // const modal_text = document.createElement("p");
+            // modal_text.innerHTML = 'Meu Fellow';
+            // modal_text.style.fontFamily = "Ubuntu-Bold";
+            // modal_text.style.textAlign = "center";
+            // modal_text.style.verticalAlign = "middle";
+            // modal_content.appendChild(modal_text);
 
     document.body.appendChild(modal);
 
@@ -137,5 +236,5 @@ var myAppJavaScript = function(){
 const DEBUG = true
 
 if(DEBUG){
-    myAppJavaScript();
+    fellow_login();
 }

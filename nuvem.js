@@ -169,7 +169,7 @@ var fillProfileLogin = function(modal_content){
             BUTTON.innerHTML += "Login";
             login_form.append(BUTTON);
 
-            modal_span.onclick = function() {
+            BUTTON.onclick = function() {
                 LS.fellow = {
                     user: "joao@fellow.com",
                 }

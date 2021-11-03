@@ -59,14 +59,14 @@ var P = function(id){
     return p
 }
 
-var fellow_login = async function(){
+var fellow_login = async function(email = null, pwd = null){
 
     var url = new URL(BASE_URI +  'profile')
 
     var params = [
-        ['email', document.getElementById('email').value],
-        ['pwd', document.getElementById('password').value],
-        ['id_nuvem_company', 1643050]
+        ['email', email ? email : document.getElementById('email').value],
+        ['pwd', pwd],
+        ['id_nuvem_company', LS.store.id]
     ]
     
     url.search = new URLSearchParams(params).toString();
@@ -369,7 +369,7 @@ var myAppJavaScript = function(){
             // <img>
             const fellow_logo = document.createElement("img");
             fellow_logo.src = "https://gestao.fellowdot.com/static/geral/media/theme/Fellow-02.png";
-            fellow_logo.style.width = "100%"
+            fellow_logo.style.width = "15%"
             fellow_logo.style.textAlign = "center";
             fellow_logo.style.verticalAlign = "middle"
 
@@ -464,10 +464,15 @@ function parseQuery ( query ) {
 const DEBUG = true
 
 if(DEBUG){
-    myAppJavaScript();
+    if(LS?.fellow?.user != null){
+        fellow_login(LS?.fellow?.user)
+    }
+    else{
+        myAppJavaScript();
+    }
 }
 
-document.getElementById('first_screen_update').onclick = fellow_login
+document.getElementById('first_screen_update').onclick = fellow_login()
 
 function httpGetAsync(theUrl, callback){
     var xmlHttp = new XMLHttpRequest();

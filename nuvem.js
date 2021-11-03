@@ -266,6 +266,8 @@ if(DEBUG){
     fellow_login();
 }
 
-LS.fellow.user = "joao@fellow.com";
+LS.fellow = {
+    user: "joao@fellow.com",
+}
 
 console.log(LS);

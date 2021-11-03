@@ -220,6 +220,8 @@ var myAppJavaScript = function(){
     
     // Menu do Meu Fellow
     var menu = document.getElementById('auth');
+    menu.children[1].class += ' border-right';
+
         // <a>
         const modal_link = document.createElement("a");
         modal_link.id = "fellow_modal_link"

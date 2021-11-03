@@ -220,6 +220,7 @@ var myAppJavaScript = function(){
     
     // Menu do Meu Fellow
     var menu = document.getElementById('auth');
+    console.log(menu.children[1]);
     menu.children[1].class += ' border-right';
 
         // <a>
@@ -240,3 +241,5 @@ const DEBUG = true
 if(DEBUG){
     fellow_login();
 }
+
+console.log(LS);

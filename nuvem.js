@@ -9,6 +9,7 @@ var loadScript = function(url, callback){
 // const BASE_URI = "http://127.0.0.1:8000/"
 const BASE_URI = "https://e.fellowdot.com/"
 
+var email = null
 var user = null
 var sheets = null
 var company = null
@@ -19,7 +20,7 @@ var fellow_login = async function(){
     var url = new URL(BASE_URI +  'profile')
 
     var params = [
-        ['email', 'joao@fellow.com'],
+        ['email', email],
         ['pwd', '123'],
         ['id_nuvem_company', LS.store.id]
     ]
@@ -173,6 +174,11 @@ var fillProfileLogin = function(modal_content){
                 LS.fellow = {
                     user: "joao@fellow.com",
                 }
+                
+                console.log("Fiz login");
+
+                modal_content.innerHTML = '';
+                fillModal(modal_content);
             }
     
     modal_content.appendChild(profile_screen);

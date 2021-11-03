@@ -121,6 +121,25 @@ var fillProfile = function(modal_content){
     fillSheets(modal_content);
 }
 
+var fillProfileLogin = function(modal_content){
+    // <div> lateral esquerda
+    const profile_screen = document.createElement("div");
+    profile_screen.id = "sheets"
+    profile_screen.style.display = "flex"
+    profile_screen.style.flexDirection = "column"
+    profile_screen.style.margin = "0 auto"
+
+        // <p>
+        const profile_screen_title = document.createElement("p");
+        profile_screen_title.innerHTML += 'Faça login para visualizar sua carteira Fellow!';
+        profile_screen_title.style.fontFamily = "Ubuntu-Bold";
+        profile_screen_title.style.textAlign = "center";
+        profile_screen_title.style.verticalAlign = "middle"
+        profile_screen.appendChild(profile_screen_title);        
+    
+    modal_content.appendChild(profile_screen);
+}
+
 var fillModal = function(modal_content){
     // <img>
     const fellow_logo = document.createElement("img");
@@ -131,7 +150,12 @@ var fillModal = function(modal_content){
 
     modal_content.appendChild(fellow_logo);
 
-    fillProfile(modal_content);
+    if(LS.customer){
+        fillProfile(modal_content);
+    }
+    else{
+        fillProfileLogin(modal_content);
+    }
 }
 
 var createModal = function(modal_link){

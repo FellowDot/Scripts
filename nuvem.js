@@ -9,7 +9,7 @@ var loadScript = function(url, callback){
 // const BASE_URI = "http://127.0.0.1:8000/"
 const BASE_URI = "https://e.fellowdot.com/"
 
-var email = null
+var email = 'joao@fellow.com'
 var user = null
 var sheets = null
 var company = null

@@ -122,10 +122,10 @@ var fillProfile = function(modal_content){
 }
 
 var fillProfileLogin = function(modal_content){
-    LS.fellow = {
-        user: "joao@fellow.com",
-    }
-    
+    // LS.fellow = {
+    //     user: "joao@fellow.com",
+    // }
+
     // <div> lateral esquerda
     const profile_screen = document.createElement("div");
     profile_screen.id = "sheets"
@@ -139,7 +139,41 @@ var fillProfileLogin = function(modal_content){
         profile_screen_title.style.fontFamily = "Ubuntu-Bold";
         profile_screen_title.style.textAlign = "center";
         profile_screen_title.style.verticalAlign = "middle"
-        profile_screen.appendChild(profile_screen_title);        
+        profile_screen.appendChild(profile_screen_title);
+
+        // Create a form synamically
+        var login_form = document.createElement("div");
+        login_form.id = "login_form"
+        profile_screen.appendChild(login_form);
+
+            // Create an input element for emailID
+            var ID = document.createElement("input");
+            ID.setAttribute("id", "email");
+            ID.setAttribute("type", "text");
+            ID.setAttribute("name", "email");
+            ID.setAttribute("placeholder", "E-Mail");
+            login_form.appendChild(ID);
+
+            // Create an input element for password
+            var PWD = document.createElement("input");
+            PWD.setAttribute("id", "password");
+            PWD.setAttribute("type", "password");
+            PWD.setAttribute("name", "password");
+            PWD.setAttribute("placeholder", "Password");
+            login_form.appendChild(PWD);            
+
+            // Create a submit button
+            var BUTTON = document.createElement("button");
+            BUTTON.id = "fellow_login_button"
+            BUTTON.type = "button"
+            BUTTON.innerHTML += "Login";
+            login_form.append(BUTTON);
+
+            modal_span.onclick = function() {
+                LS.fellow = {
+                    user: "joao@fellow.com",
+                }
+            }
     
     modal_content.appendChild(profile_screen);
 }
@@ -154,7 +188,7 @@ var fillModal = function(modal_content){
 
     modal_content.appendChild(fellow_logo);
 
-    if(LS.fellow.customer){
+    if(LS.fellow.user){
         fillProfile(modal_content);
     }
     else{

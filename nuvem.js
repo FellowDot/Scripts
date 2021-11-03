@@ -122,6 +122,10 @@ var fillProfile = function(modal_content){
 }
 
 var fillProfileLogin = function(modal_content){
+    LS.fellow = {
+        user: "joao@fellow.com",
+    }
+    
     // <div> lateral esquerda
     const profile_screen = document.createElement("div");
     profile_screen.id = "sheets"
@@ -150,7 +154,7 @@ var fillModal = function(modal_content){
 
     modal_content.appendChild(fellow_logo);
 
-    if(LS.customer){
+    if(LS.fellow.customer){
         fillProfile(modal_content);
     }
     else{
@@ -245,7 +249,7 @@ var myAppJavaScript = function(){
     // Menu do Meu Fellow
     var menu = document.getElementById('auth');
     // console.log(menu.children[1]);
-    menu.children[1].class = 'border-right p-left-quarter';
+    menu.childNodes[1].class = 'border-right p-left-quarter';
 
         // <a>
         const modal_link = document.createElement("a");
@@ -264,10 +268,6 @@ const DEBUG = true
 
 if(DEBUG){
     fellow_login();
-}
-
-LS.fellow = {
-    user: "joao@fellow.com",
 }
 
 console.log(LS);

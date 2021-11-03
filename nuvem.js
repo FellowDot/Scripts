@@ -21,7 +21,7 @@ var fellow_login = async function(){
     var params = [
         ['email', 'joao@fellow.com'],
         ['pwd', '123'],
-        ['id_nuvem_company', 1643050]
+        ['id_nuvem_company', LS.store.id]
     ]
     
     url.search = new URLSearchParams(params).toString();
@@ -29,10 +29,10 @@ var fellow_login = async function(){
     let response = await fetch(url);
     let data = await response.json();
 
-    user = data['user']
-    sheets = data['chk']
-    company = data['company']
-    to_expire = data['to_expire']
+    user = data['user'];
+    sheets = data['chk'];
+    company = data['company'];
+    to_expire = data['to_expire'];
 
     myAppJavaScript();
 }
@@ -220,8 +220,8 @@ var myAppJavaScript = function(){
     
     // Menu do Meu Fellow
     var menu = document.getElementById('auth');
-    console.log(menu.children[1]);
-    menu.children[1].class += ' border-right';
+    // console.log(menu.children[1]);
+    menu.children[1].class = 'border-right p-left-quarter';
 
         // <a>
         const modal_link = document.createElement("a");

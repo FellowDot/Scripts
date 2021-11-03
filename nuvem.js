@@ -188,7 +188,7 @@ var fillModal = function(modal_content){
 
     modal_content.appendChild(fellow_logo);
 
-    if(LS.fellow.user){
+    if(LS.fellow != null & LS.fellow.user != null){
         fillProfile(modal_content);
     }
     else{

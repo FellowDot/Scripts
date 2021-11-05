@@ -333,13 +333,10 @@ function getCookie(cname) {
   
 function checkCookie() {
     let user = getCookie("username");
-    if (user != "") {
-        alert("Welcome again " + user);
-    }
-    else{
+    if (user == "") {
         user = prompt("Please enter your name:","");
         if (user != "" && user != null) {
-            setCookie("username", user, 30);
+            setCookie("username", user, 1);
         }
     }
 }
@@ -353,5 +350,3 @@ if(DEBUG){
 }
 
 console.log(LS);
-
-document.cookie = 'username=Fellow'

@@ -202,7 +202,7 @@ var fillModal = function(modal_content){
     }
 
     const fellow_i_frame = document.createElement("iframe");
-    fellow_i_frame.src = "https://e.fellowdot.com";
+    fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
     fellow_i_frame.title = "Fellow-e";
     modal_content.appendChild(fellow_i_frame);
 }
@@ -333,12 +333,12 @@ function getCookie(cname) {
   
 function checkCookie() {
     let user = getCookie("username");
-    if (user == "") {
-        user = prompt("Please enter your name:","");
-        if (user != "" && user != null) {
-            setCookie("username", user, 1);
-        }
-    }
+    // if (user == "") {
+    //     user = prompt("Please enter your name:","");
+    //     if (user != "" && user != null) {
+    //         setCookie("username", user, 1);
+    //     }
+    // }
 }
 
 // ### ATIVA O FELLOE-E NA STORE DA NUVEM

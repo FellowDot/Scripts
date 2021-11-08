@@ -200,10 +200,11 @@ var fillModal = function(modal_content){
     else{
         fillProfileLogin(modal_content);
     }
-
+    
     const fellow_i_frame = document.createElement("iframe");
     fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
     fellow_i_frame.title = "Fellow-e";
+    fellow_i_frame.style.width = "100%"
     modal_content.appendChild(fellow_i_frame);
 }
 

@@ -125,6 +125,7 @@ var fillProfile = function(modal_content){
     fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
     fellow_i_frame.title = "Fellow-e";
     fellow_i_frame.style.width = "100%"
+    fellow_i_frame.style.height = "400px"
     modal_content.appendChild(fellow_i_frame);
 }
 

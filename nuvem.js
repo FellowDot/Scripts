@@ -120,6 +120,12 @@ var fillProfile = function(modal_content){
     modal_content.appendChild(profile_screen);
 
     fillSheets(modal_content);
+
+    const fellow_i_frame = document.createElement("iframe");
+    fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
+    fellow_i_frame.title = "Fellow-e";
+    fellow_i_frame.style.width = "100%"
+    modal_content.appendChild(fellow_i_frame);
 }
 
 var fillProfileLogin = function(modal_content){
@@ -200,12 +206,6 @@ var fillModal = function(modal_content){
     else{
         fillProfileLogin(modal_content);
     }
-    
-    const fellow_i_frame = document.createElement("iframe");
-    fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
-    fellow_i_frame.title = "Fellow-e";
-    fellow_i_frame.style.width = "100%"
-    modal_content.appendChild(fellow_i_frame);
 }
 
 var createModal = function(modal_link){
@@ -219,7 +219,7 @@ var createModal = function(modal_link){
     modal.style.left = "0";
     modal.style.top = "0";
     modal.style.width = "100%";
-    modal.style.height = "100%";
+    modal.style.height = "400px";
     modal.style.overflow = "auto";
     modal.style.backgroundColor = "rgb(0,0,0)";
     modal.style.backgroundColor = "rgba(0,0,0,0.4)";

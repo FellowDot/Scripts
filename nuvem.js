@@ -207,7 +207,7 @@ var fillModal = function(modal_content){
         fellow_i_frame.title = "Fellow-e";
         fellow_i_frame.style.width = "100%"
         fellow_i_frame.style.height = "80%"
-        fellow_i_frame.scrolling = "no"
+        fellow_i_frame.scrolling = "none"
         modal_content.appendChild(fellow_i_frame);
     }
     else{

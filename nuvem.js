@@ -236,6 +236,7 @@ var createModal = function(modal_link){
         modal_content.style.backgroundColor = "#fefefe";
         modal_content.style.margin = "15% auto";
         modal_content.style.textAlign = "center";
+        modal_content.style.height = "600px";
         modal_content.style.padding = "20px";
         modal_content.style.border = "1px solid #888";
         modal_content.style.width = "80%";

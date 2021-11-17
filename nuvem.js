@@ -202,13 +202,27 @@ var fillModal = function(modal_content){
 
     if(LS?.fellow?.user != null){
 //         fillProfile(modal_content);
-        const fellow_i_frame = document.createElement("iframe");
-        fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
-        fellow_i_frame.title = "Fellow-e";
-        fellow_i_frame.style.width = "100%"
-        fellow_i_frame.style.height = "80%"
-        fellow_i_frame.setAttribute("scrolling", "none");
-        modal_content.appendChild(fellow_i_frame);
+        const fellow_i_frame_div = document.createElement("div");
+        fellow_i_frame_div.id = "fellow_iframe_div"
+        fellow_i_frame_div.style.position = "relative";
+        fellow_i_frame_div.style.zIndex = "2";
+        fellow_i_frame_div.style.overflowX = "auto";
+        fellow_i_frame_div.style.overflowY = "auto";
+        fellow_i_frame_div.style.width = "auto";
+        fellow_i_frame_div.style.height = "600px";
+
+            const fellow_i_frame = document.createElement("iframe");
+            fellow_i_frame.id = "fellow_iframe";
+            fellow_i_frame.src = "https://e.fellowdot.com/usercompanysheet/2/1";
+            fellow_i_frame.title = "Fellow-e";
+            fellow_i_frame.style.width = "100%"
+            fellow_i_frame.style.height = "80%"
+            fellow_i_frame.style.border = "none"
+            // fellow_i_frame.setAttribute("scrolling", "no");
+            fellow_i_frame_div.appendChild(fellow_i_frame);
+            // document.getElementById("fellow_iframe").setAttribute("scrolling", "no");
+        
+        modal_content.appendChild(fellow_i_frame_div);
     }
     else{
         fillProfileLogin(modal_content);
